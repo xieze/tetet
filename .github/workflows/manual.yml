@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     # Inputs the workflow accepts.
     inputs:
-     environment:
+      environment:
         description: '选择部署环境'
         required: true
         type: choice
