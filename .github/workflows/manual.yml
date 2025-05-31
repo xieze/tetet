@@ -1,6 +1,6 @@
 # This is a basic workflow that is manually triggered
 name: 工作流测试
-description:部署到 ${{ github.event.inputs.environment }} - 版本 ${{ github.event.inputs.name }}
+run-name: 部署到 ${{ github.event.inputs.environment }} - 版本 ${{ github.event.inputs.name }}
 # Controls when the action will run. Workflow runs when manually triggered using the UI
 # or API.
 on:
