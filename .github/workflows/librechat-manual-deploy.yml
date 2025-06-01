@@ -4,22 +4,34 @@ on:
   workflow_dispatch:
     inputs:
       environment:
-        description: 'Select the environment to deploy'
+        description: "Select the environment to deploy"
         required: true
         type: choice
         options:
           - dev
           - prod
       version:
-        description: 'Input the version to deploy'
+        description: "Input the version to deploy"
         required: true
         type: string
 
 jobs:
-  trigger:
+  trigger-deploy:
     runs-on: ubuntu-latest
+    permissions:
+      actions: write # 添加此权限
     steps:
-      - name: Pass inputs
-        run: |
-          echo "Environment: ${{ github.event.inputs.environment }}"
-          echo "Version: ${{ github.event.inputs.version }}" 
+      - name: Trigger Libre Chat Deploy
+        uses: actions/github-script@v6
+        with:
+          script: |
+            await github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'librechat-deploy.yml',
+              ref: 'main',
+              inputs: {
+                environment: '${{ github.event.inputs.environment }}',
+                version: '${{ github.event.inputs.version }}'
+              }
+            })

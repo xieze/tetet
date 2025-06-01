@@ -9,6 +9,8 @@ on:
 jobs:
   trigger:
     runs-on: ubuntu-latest
+    permissions:
+      actions: write # 添加此权限
     steps:
       - name: Extract tag info
         id: extract-tag
@@ -35,4 +37,4 @@ jobs:
                 environment: '${{ steps.extract-tag.outputs.environment }}',
                 version: '${{ steps.extract-tag.outputs.version }}'
               }
-            }) 
+            })
