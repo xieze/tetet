@@ -1,0 +1,25 @@
+name: Manual Deploy Trigger
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Select the environment to deploy'
+        required: true
+        type: choice
+        options:
+          - dev
+          - prod
+      version:
+        description: 'Input the version to deploy'
+        required: true
+        type: string
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pass inputs
+        run: |
+          echo "Environment: ${{ github.event.inputs.environment }}"
+          echo "Version: ${{ github.event.inputs.version }}" 
