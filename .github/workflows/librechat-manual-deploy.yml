@@ -12,6 +12,7 @@ on:
           - prod
       version:
         description: "Input the version to deploy"
+        default: "v0.0.1"
         required: true
         type: string
 
@@ -25,6 +26,7 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
+            const currentBranch = context.ref.replace('refs/heads/', '');
             await github.rest.actions.createWorkflowDispatch({
               owner: context.repo.owner,
               repo: context.repo.repo,
