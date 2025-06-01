@@ -1,6 +1,6 @@
 # This is a basic workflow that is manually triggered
 name: Libre Chat Deploy
-run-name: Deploy to ${{ github.event.workflow_run.inputs.environment }} - Version ${{ github.event.workflow_run.inputs.version }}
+run-name: Deploy to ${{ github.event.inputs.environment }} - Version ${{ github.event.inputs.version }}
 # Controls when the action will run. Workflow runs when manually triggered using the UI
 # or API.
 on:
@@ -17,8 +17,8 @@ on:
 
 env:
   DOCKER_IMAGE_NAME_PREFIX: app-agent-librechat
-  DEPLOY_ENV: ${{github.event.workflow_run.inputs.environment }}
-  DEPLOY_VERSION: ${{github.event.workflow_run.inputs.version }}
+  DEPLOY_ENV: ${{github.event.inputs.environment }}
+  DEPLOY_VERSION: ${{github.event.inputs.version }}
 
 jobs:
   deploy:
@@ -38,5 +38,5 @@ jobs:
         id: extractEnv
         shell: bash
         run: |
-          echo "DEPLOY_ENV=${{github.event.workflow_run.inputs.environment }}" >> $GITHUB_ENV
-          echo "DEPLOY_VERSION=${{github.event.workflow_run.inputs.version }}" >> $GITHUB_ENV
+          echo "DEPLOY_ENV=${{github.event.inputs.environment }}" >> $GITHUB_ENV
+          echo "DEPLOY_VERSION=${{github.event.inputs.version }}" >> $GITHUB_ENV
