@@ -14,12 +14,6 @@ on:
         description: "Version to deploy"
         required: true
         type: string
-  workflow_run:
-    workflows:
-      - "Manual Deploy Trigger" # 监听 librechat-manual-deploy.yml
-      - "Tag Deploy Trigger" # 监听 librechat-tags-deploy.yml
-    types:
-      - completed
 
 env:
   DOCKER_IMAGE_NAME_PREFIX: app-agent-librechat
