@@ -21,7 +21,7 @@ jobs:
   trigger-deploy:
     runs-on: ubuntu-latest
     permissions:
-      actions: write # 添加此权限
+      actions: write
     steps:
       - name: Trigger Libre Chat Deploy
         uses: actions/github-script@v6

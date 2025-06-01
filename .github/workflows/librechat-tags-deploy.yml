@@ -10,7 +10,7 @@ jobs:
   trigger:
     runs-on: ubuntu-latest
     permissions:
-      actions: write # 添加此权限
+      actions: write
     steps:
       - name: Extract tag info
         id: extract-tag

@@ -29,14 +29,15 @@ jobs:
     steps:
       - name: Debug inputs
         run: |
-          echo "Environment: ${{ github.event.inputs.environment }}"
-          echo "Version: ${{ github.event.inputs.version }}"
+          echo "Environment: $DEPLOY_ENV"
+          echo "Version: $DEPLOY_VERSION"
+
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set environment variables
-        id: extractEnv
-        shell: bash
-        run: |
-          echo "DEPLOY_ENV=${{github.event.inputs.environment }}" >> $GITHUB_ENV
-          echo "DEPLOY_VERSION=${{github.event.inputs.version }}" >> $GITHUB_ENV
+      # - name: Set environment variables
+      #   id: extractEnv
+      #   shell: bash
+      #   run: |
+      #     echo "DEPLOY_ENV=${{github.event.inputs.environment }}" >> $GITHUB_ENV
+      #     echo "DEPLOY_VERSION=${{github.event.inputs.version }}" >> $GITHUB_ENV
