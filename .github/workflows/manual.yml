@@ -1,5 +1,5 @@
 # This is a basic workflow that is manually triggered
-name: 工作流测试
+name: 工作流测试1
 run-name: 部署到 ${{ github.event.inputs.environment }} - 版本 ${{ github.event.inputs.name }}
 # Controls when the action will run. Workflow runs when manually triggered using the UI
 # or API.
@@ -8,7 +8,7 @@ on:
     # Inputs the workflow accepts.
     inputs:
       environment:
-        description: '选择部署环境'
+        description: "选择部署环境"
         required: true
         type: choice
         options:
@@ -18,9 +18,9 @@ on:
           - 生产环境
       name:
         # Friendly description to be shown in the UI instead of 'name'
-        description: 'Person to greet'
+        description: "Person to greet"
         # Default value if no value is explicitly provided
-        default: 'World'
+        default: "World"
         # Input has to be provided for the workflow to run
         required: true
         # The data type of the input
@@ -35,6 +35,6 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    # Runs a single command using the runners shell
-    - name: Send greeting
-      run: echo "Hello ${{ inputs.name }}"
+      # Runs a single command using the runners shell
+      - name: Send greeting
+        run: echo "Hello ${{ inputs.name }}"
