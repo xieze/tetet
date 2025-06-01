@@ -32,7 +32,6 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               workflow_id: 'librechat-deploy.yml',
-              ref: 'main',
               inputs: {
                 environment: '${{ steps.extract-tag.outputs.environment }}',
                 version: '${{ steps.extract-tag.outputs.version }}'

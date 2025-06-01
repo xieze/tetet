@@ -29,7 +29,6 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               workflow_id: 'librechat-deploy.yml',
-              ref: 'main',
               inputs: {
                 environment: '${{ github.event.inputs.environment }}',
                 version: '${{ github.event.inputs.version }}'
