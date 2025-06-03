@@ -19,6 +19,7 @@ jobs:
           if [[ "$TAG_NAME" =~ ^librechat-(dev|prod)-v([0-9]+\.[0-9]+\.[0-9]+)$ ]]; then
             echo "environment=${BASH_REMATCH[1]}" >> $GITHUB_OUTPUT
             echo "version=${BASH_REMATCH[2]}" >> $GITHUB_OUTPUT
+             echo "tag_name=$TAG_NAME" >> $GITHUB_OUTPUT
           else
             echo "Error: Invalid tag format"
             exit 1
@@ -28,12 +29,11 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            const currentBranch = context.ref.replace('refs/heads/', '');
             await github.rest.actions.createWorkflowDispatch({
               owner: context.repo.owner,
               repo: context.repo.repo,
               workflow_id: 'librechat-deploy.yml',
-              ref: currentBranch,
+              ref: '${{ steps.extract-tag.outputs.tag_name }}',
               inputs: {
                 environment: '${{ steps.extract-tag.outputs.environment }}',
                 version: '${{ steps.extract-tag.outputs.version }}'
