@@ -34,6 +34,12 @@ jobs:
 
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Debug current commit
+        run: |
+          git log -1
 
       # - name: Set environment variables
       #   id: extractEnv
