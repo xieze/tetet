@@ -1,4 +1,4 @@
-# This is a basic workflow that is manually triggered
+# This is a basic workflow that is manually triggered11
 name: Libre Chat Deploy
 run-name: Deploy to ${{ github.event.inputs.environment }} - Version ${{ github.event.inputs.version }}
 # Controls when the action will run. Workflow runs when manually triggered using the UI
