@@ -3,8 +3,10 @@ name: Tag Deploy Trigger
 on:
   push:
     tags:
-      - "librechat-dev*"
-      - "librechat-prod*"
+      - "server-dev*"
+      - "server-prod*"
+      - "student_frontend-dev*"
+      - "student_frontend-prod*"
 
 jobs:
   trigger:
@@ -16,13 +18,11 @@ jobs:
         id: extract-tag
         run: |
           TAG_NAME=$(echo ${{ github.ref }} | sed 's/refs\/tags\///')
-          if [[ "$TAG_NAME" =~ ^librechat-(dev|prod)-(v[0-9]+\.[0-9]+\.[0-9]+)$ ]]; then
+          if [[ "$TAG_NAME" =~ ^(server|student_frontend)-(dev|prod)-(v[0-9]+\.[0-9]+\.[0-9]+)$ ]]; then
+            echo "project_name=${BASH_REMATCH[0]}" >> $GITHUB_OUTPUT
             echo "environment=${BASH_REMATCH[1]}" >> $GITHUB_OUTPUT
             echo "version=${BASH_REMATCH[2]}" >> $GITHUB_OUTPUT
-             echo "tag_name=$TAG_NAME" >> $GITHUB_OUTPUT
-          else
-            echo "Error: Invalid tag format"
-            exit 1
+            echo "tag_name=$TAG_NAME" >> $GITHUB_OUTPUT
           fi
 
       - name: Trigger Libre Chat Deploy
@@ -32,7 +32,7 @@ jobs:
             await github.rest.actions.createWorkflowDispatch({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              workflow_id: 'librechat-deploy.yml',
+              workflow_id: '${{ steps.extract-tag.outputs.project_name }}-deploy.yml',
               ref: '${{ steps.extract-tag.outputs.tag_name }}',
               inputs: {
                 environment: '${{ steps.extract-tag.outputs.environment }}',
